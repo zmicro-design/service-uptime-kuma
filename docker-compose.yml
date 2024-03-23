@@ -1,0 +1,26 @@
+services:
+  uptime_kuma:
+    image: whatwewant/connect-doreamon:v1
+    ports:
+      - 0.0.0.0:${SERVICE_UPTIME_KUMA_PORT}:8080
+    environment:
+      UPSTREAM: http://uptime_kuma_upstream:3001
+      SECRET_KEY: ${SERVICE_UPTIME_KUMA_SECRET_KEY}
+      CLIENT_ID: ${SERVICE_UPTIME_KUMA_DOREAMON_CLIENT_ID}
+      CLIENT_SECRET: ${SERVICE_UPTIME_KUMA_DOREAMON_CLIENT_SECRET}
+      REDIRECT_URI: ${SERVICE_UPTIME_KUMA_DOREAMON_REDIRECT_URI}
+      #
+      AUTH_IGNORE_PATHS: "^/status/,^/api/status-page/,^/api/push/,^/upload/"
+
+  uptime_kuma_upstream:
+    image: whatwewant/uptime_kuma:v1.23.11-1
+    environment:
+      NODE_ENV: production
+      SECRET_KEY: ${SERVICE_UPTIME_KUMA_SECRET_KEY}
+    volumes:
+      - ${SERVICE_DATA}:/app/data
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress

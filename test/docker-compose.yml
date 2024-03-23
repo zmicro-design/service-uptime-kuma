@@ -1,0 +1,13 @@
+services:
+  uptime_kuma:
+    restart: always
+    image: whatwewant/uptime_kuma:${SERVICE_UPTIME_KUMA_IMAGE_VERSION}
+    environment:
+      PORT: $SERVICE_UPTIME_KUMA_PORT
+      USERNAME: ${SERVICE_UPTIME_KUMA_USERNAME}
+      PASSWORD: ${SERVICE_UPTIME_KUMA_PASSWORD}
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress
