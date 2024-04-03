@@ -12,6 +12,8 @@ check() {
 
   service::config_set SERVICE_UPTIME_KUMA_PORT text "Port" 8080
 
+  service::config_set SERVICE_UPTIME_KUMA_SECRET_KEY text "Secret Key" $(os::uuid)
+
   service::config_set SERVICE_UPTIME_KUMA_DOREAMON_CLIENT_ID text "Doreamon Client ID"
   service::config_set SERVICE_UPTIME_KUMA_DOREAMON_CLIENT_SECRET text "Doreamon Client SECRET"
   service::config_set SERVICE_UPTIME_KUMA_DOREAMON_REDIRECT_URI text "Doreamon Redirect URI"
